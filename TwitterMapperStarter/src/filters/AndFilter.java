@@ -14,7 +14,7 @@ public class AndFilter implements Filter {
     }
 
     /**
-     * An or filter matches when both of the children do, otherwise not
+     * An AND filter matches when both of the children match, otherwise not
      * @param s     the tweet to check
      * @return      whether or not it matches
      */
@@ -31,6 +31,6 @@ public class AndFilter implements Filter {
     }
 
     public String toString() {
-        return child1.toString() + " and " + child2.toString();
+        return "(" + child1 + " and " + child2 + ")";
     }
 }

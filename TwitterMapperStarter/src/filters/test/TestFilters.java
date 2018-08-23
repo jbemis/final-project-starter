@@ -29,6 +29,26 @@ public class TestFilters {
         assertTrue(f.matches(makeStatus("red Skelton")));
     }
 
+    @Test
+    public void testAnd() {
+        Filter f = new AndFilter(new BasicFilter("red"), new BasicFilter("blue"));
+        assertTrue(f.matches(makeStatus("red and blue")));
+        assertTrue(f.matches(makeStatus("Red and Blue")));
+        assertFalse(f.matches(makeStatus("Robert and Flinstone")));
+        assertFalse(f.matches(makeStatus("Fred and Skelton")));
+    }
+
+
+    @Test
+    public void testOr() {
+        Filter f = new OrFilter(new BasicFilter("fred"), new BasicFilter("skelton"));
+        assertTrue(f.matches(makeStatus("Fred or Flintstone")));
+        assertTrue(f.matches(makeStatus("Red or Skelton")));
+        assertFalse(f.matches(makeStatus("Robert or Flinstone")));
+        assertFalse(f.matches(makeStatus("Red or Flinstone")));
+    }
+
+
     private Status makeStatus(String text) {
         return new Status() {
             @Override
